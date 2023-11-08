@@ -4,9 +4,10 @@
  */
 const ROSTER_SCHEMA = [ // Column for...
     "forum",        // Forum name
-    "nation",       // TSP nation name
+    "nation",       // TEP nation name
+    "wa_nation",    // WA nation name
     "discord",      // Discord handle
-    "join-date",    // Legislator since
+    "join-date",    // Magister since
     "notes",        // Chair's discretion notes
     "ballots",      // Ballots cast [this can be multiple columns!]
     "num_votes",    // Number of ballots cast

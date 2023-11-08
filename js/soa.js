@@ -217,7 +217,7 @@ async function legCheck(roster) {
 
     // Fetch a list of all nations and all regional ones to verify existence/residence
     let nationsList = await API.getNations(),
-        residents = await API.getResidents('the_south_pacific');
+        residents = await API.getResidents('the_east_pacific');
 
     // Check every legislator for all compliance criteria
     for(let row of roster) {
