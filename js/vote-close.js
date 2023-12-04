@@ -31,10 +31,12 @@ function generate() {
     let numMags = 0;
     let pasteVotesList = '';
     let nameIndex = getIndex('forum', roster[NUM_HEADERS]);
+    let notesIndex = getIndex('notes', roster[NUM_HEADERS])
     for(let row of roster) {
         if(roster.indexOf(row) < NUM_HEADERS) continue;
         pasteVotesList += '\n';
         let cells = row.split('\t');
+        if(cells[notesIndex].includes("Suspended")) continue;
         pasteVotesList += ballots[cells[nameIndex]] === undefined ? '' : capitalizeFirst(ballots[cells[nameIndex]]);
         numMags++;
     }
