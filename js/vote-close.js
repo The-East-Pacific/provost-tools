@@ -8,7 +8,6 @@
 const CTX = document.getElementById('result-img').getContext('2d');
 
 function generate() {
-    CTX.clearRect(0, 0, CTX.width, CTX.height);
     // Count the votes
     let ballots = {};
     let tally = {
@@ -52,6 +51,8 @@ function generate() {
 
 // Paint a visual representation of the voting results.
 function createVisual(voteID, threshold, tally) {
+    CTX.clearRect(0, 0, CTX.width, CTX.height);
+    CTX.beginPath();
 
     // Draw the static background image.
     CTX.drawImage(document.getElementById('bg'), 0, 0);
@@ -64,6 +65,7 @@ function createVisual(voteID, threshold, tally) {
     CTX.moveTo(51 + toThreshold, 284);
     CTX.lineTo(51 + toThreshold, 292);
     CTX.stroke();
+
     paintArch(tally);
     paintBar(tally);
 
