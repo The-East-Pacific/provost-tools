@@ -18,15 +18,15 @@ function generate() {
     }
     for(let ballot in tally) {
         let votes = 0;
-        for(let legislator of id('v' + ballot).value.split(', ')) {
-            if(legislator.length == 0) continue;
-            ballots[legislator] = ballot;
+        for(let magister of id('v' + ballot).value.split(', ')) {
+            if(magister.length == 0) continue;
+            ballots[magister] = ballot;
             votes++;
         }
         tally[ballot] = votes;
     }
 
-    // Count the number of legislators and create the pasteable vote list for the spreadsheet
+    // Count the number of magisters and create the pasteable vote list for the spreadsheet
     let roster = id('roster').value.split('\n');
     let numLegs = 0;
     let pasteVotesList = '';
@@ -46,7 +46,7 @@ function generate() {
     console.log(tally);
 
     createVisual(billCode, threshold, tally);
-    id('bbcode-out').value = `[table=100][tr][tdc="2"][align=center][color=#109aed][size=xx-large][b]Final Result[/b][/size]\n[i]${billTitle}[/i][/color][/align][/tdc][/tr][tr][tdc="2"][align=center][img]ENTER LINK TO IMAGE AFTER UPLOAD HERE[/img][/align][/tdc][/tr][tr][td][align=center][color=#4572A7][size=large][b]Ayes: ${tally.aye}[/b][/size][/color][/align]\n[i]${(100.0 * tally.aye / (numLegs - tally.absent)).toFixed(1)}% | ${(100.0 * tally.aye / (tally.aye + tally.nay)).toFixed(1)}% (discounting abstentions)[/i][/td][td][align=center][color=#AA4643][size=large][b]Nays: ${tally.nay}[/b][/size][/color][/align]\n[i]${(100.0 * tally.nay / (numLegs - tally.absent)).toFixed(1)}% | ${(100.0 * tally.nay / (tally.aye + tally.nay)).toFixed(1)}% (discounting abstentions)[/i][/td][/tr][tr][tdc="2"]There were ${tally.abstain} Abstentions (${(100.0 * tally.abstain / (numLegs - tally.absent)).toFixed(1)}%); ${tally.absent} legislators were absent. Thus, attendance for this vote was ${(100.0 * (numLegs - tally.absent) / numLegs).toFixed(1)}%.[/tdc][/tr][tr][tdc="2"][size=medium]In light of these results, the proposal [color=` + (tally.aye >= (tally.aye + tally.nay) * threshold ? '#017000][b]passes[/b][/color], having achieved' : '#C0392B][b]fails[/b][/color], having fallen short of') + ` the required majority (>${threshold * 100}%).[/size][/tdc][/tr][/table]`;
+    id('bbcode-out').value = `[table=100][tr][tdc="2"][align=center][color=#109aed][size=xx-large][b]Final Result[/b][/size]\n[i]${billTitle}[/i][/color][/align][/tdc][/tr][tr][tdc="2"][align=center][img]ENTER LINK TO IMAGE AFTER UPLOAD HERE[/img][/align][/tdc][/tr][tr][td][align=center][color=#4572A7][size=large][b]Ayes: ${tally.aye}[/b][/size][/color][/align]\n[i]${(100.0 * tally.aye / (numLegs - tally.absent)).toFixed(1)}% | ${(100.0 * tally.aye / (tally.aye + tally.nay)).toFixed(1)}% (discounting abstentions)[/i][/td][td][align=center][color=#AA4643][size=large][b]Nays: ${tally.nay}[/b][/size][/color][/align]\n[i]${(100.0 * tally.nay / (numLegs - tally.absent)).toFixed(1)}% | ${(100.0 * tally.nay / (tally.aye + tally.nay)).toFixed(1)}% (discounting abstentions)[/i][/td][/tr][tr][tdc="2"]There were ${tally.abstain} Abstentions (${(100.0 * tally.abstain / (numLegs - tally.absent)).toFixed(1)}%); ${tally.absent} magisters were absent. Thus, attendance for this vote was ${(100.0 * (numLegs - tally.absent) / numLegs).toFixed(1)}%.[/tdc][/tr][tr][tdc="2"][size=medium]In light of these results, the proposal [color=` + (tally.aye >= (tally.aye + tally.nay) * threshold ? '#017000][b]passes[/b][/color], having achieved' : '#C0392B][b]fails[/b][/color], having fallen short of') + ` the required majority (>${threshold * 100}%).[/size][/tdc][/tr][/table]`;
     id('paste-votes').value = pasteVotesList.replace('\n', '');
 }
 
@@ -83,13 +83,13 @@ function createVisual(voteID, threshold, tally) {
 function paintArch(tally) {
     
     // Use the tweaked parliament diagram creator to draw an arch
-    // diagram of legislators with their stances
-    drawLegislators(`Aye, ${tally.aye}, #4572A7, 0.2, #FFFFFF; `
+    // diagram of magisters with their stances
+    drawMagisters(`Aye, ${tally.aye}, #4572A7, 0.2, #FFFFFF; `
             + `Nay, ${tally.nay}, #AA4643, 0.2, #FFFFFF; `
             + `Abstain, ${tally.abstain}, #FF9900, 0.2, #FFFFFF; `
             + `Absent, ${tally.absent}, #989898, 0.2, #FFFFFF`);
 
-    // Paint number of legislators
+    // Paint number of magisters
     CTX.textAlign = 'center';
     CTX.fillStyle = 'white';
     CTX.font = 'bold 36px Semplicita';

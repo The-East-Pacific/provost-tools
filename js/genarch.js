@@ -10,7 +10,7 @@ const TOTALS = [4, 15, 33, 61, 95, 138, 189, 247, 313, 388, 469, 559, 657, 762, 
 
 // Functionally slightly tweaked version in order to draw results directly onto a JS canvas.
 // The full original translation can be found down below.
-function drawLegislators(inputlist) {
+function drawMagisters(inputlist) {
     if(inputlist == null) return;
 
     // initialize list of parties
