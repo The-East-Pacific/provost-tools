@@ -8,7 +8,7 @@
 const CTX = document.getElementById('result-img').getContext('2d');
 
 function generate() {
-
+    CTX.clearRect(0, 0, CTX.width, CTX.height);
     // Count the votes
     let ballots = {};
     let tally = {
