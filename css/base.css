@@ -81,7 +81,7 @@ header > h1 {
 header > h1::before {
     content: '';
     vertical-align: text-top;
-    background-image: url('../res/logo_assembly.png');
+    background-image: url('../res/logo_tep.png');
     background-repeat: no-repeat;
     display: inline-block;
 }

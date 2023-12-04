@@ -5,8 +5,8 @@
 const REPORT_DETAILS = {
     votes: [],
     discussions: [],
-    legsDeparting: [],
-    legsArriving: []
+    magsDeparting: [],
+    magsArriving: []
 }
 
 id('soa-month').innerText = new Date(new Date() - 1000 * 60 * 60 * 24 * 7).toLocaleString('en-US', {
@@ -22,7 +22,7 @@ function edit(part) {
 }
 
 function generate() {
-    let header = `[align=center][size=x-large][b]State of the Assembly #month[/b][/size][/align]`
+    let header = `[center][size=x-large][b]State of the Assembly #month[/b][/size][/center]`
         .replace(/#month/gm, id('soa-month').innerText);
     let votesHeader = `[table=100][tr][td][size=large][b]Votes[/b][/size][/td][/tr][/table]`;
     let discussionsHeader = `[table=100][tr][td][size=large][b]Discussions[/b][/size][/td][/tr][/table]`;
@@ -39,11 +39,11 @@ function generate() {
     listDiscussions += '\n[/list]';
 
     let tableDeparting = '[table=100]\n[tr][td][b]Forum Username[/b][/td][td][b]Nation in TSP[/b][/td][td][b]Reason[/b][/td][/tr]';
-    for(let noncomplier of REPORT_DETAILS.legsDeparting) tableDeparting += `\n[tr][td]@${/[ \d]/g.test(noncomplier.forum) ? '\'' + noncomplier.forum + '\'' : noncomplier.forum}[/td][td][nation]${noncomplier.nation}[/nation][/td][td]${noncomplier.reason}[/td][/tr]`;
+    for(let noncomplier of REPORT_DETAILS.magsDeparting) tableDeparting += `\n[tr][td]@${/[ \d]/g.test(noncomplier.forum) ? '\'' + noncomplier.forum + '\'' : noncomplier.forum}[/td][td][nation]${noncomplier.nation}[/nation][/td][td]${noncomplier.reason}[/td][/tr]`;
     tableDeparting += '\n[/table]';
 
     let listArriving = ' ';
-    for(let arrival of REPORT_DETAILS.legsArriving) listArriving += ` | @${arrival.forum.includes(' ') ? '\'' + arrival.forum + '\'' : arrival.forum}`;
+    for(let arrival of REPORT_DETAILS.magsArriving) listArriving += ` | @${arrival.forum.includes(' ') ? '\'' + arrival.forum + '\'' : arrival.forum}`;
 
     let final = `${header}\n\n${votesHeader}\n\n${id('intro-votes').value}\n\n[spoiler=List of votes]\n${tableVotes}\n[/spoiler]\n\n${discussionsHeader}\n\n[spoiler=List of discussions active this past month]\n${listDiscussions}\n[/spoiler]\n\n${legCheckHeader}\n\n${legCheckIntro}\n\n${tableDeparting}\n\n${arrivalsHeader}\n\n${id('intro-arrivals').value}\n\n${listArriving.replace('  | ', '')}`;
 
@@ -250,8 +250,8 @@ async function legCheck(roster) {
         checkFails.push(failReport);
         checkTable.appendChild(createTableRow(failReport, 'L'));
     }
-    REPORT_DETAILS.legsDeparting = checkFails;
-    REPORT_DETAILS.legsArriving = arrivals;
+    REPORT_DETAILS.magsDeparting = checkFails;
+    REPORT_DETAILS.magsArriving = arrivals;
     updateFailingCount();
     updateArrivingCount();
 }
@@ -261,7 +261,7 @@ async function legCheck(roster) {
  * @param {HTMLTableRowElement} row Table row of the Legislator Check table corresponding to the legislator
  */
  function updateFailingLegislator(row) {
-    REPORT_DETAILS.legsDeparting[row.rowIndex - 1] = parseToReport(row);
+    REPORT_DETAILS.magsDeparting[row.rowIndex - 1] = parseToReport(row);
 }
 
 /**
@@ -269,7 +269,7 @@ async function legCheck(roster) {
  * @param {HTMLTableRowElement} row Table row of the Legislator Check table to remove
  */
 function removeFailingLegislator(row) {
-    REPORT_DETAILS.legsDeparting.splice(row.rowIndex - 1, 1);
+    REPORT_DETAILS.magsDeparting.splice(row.rowIndex - 1, 1);
     row.parentElement.removeChild(row);
     updateFailingCount();
 }
@@ -280,7 +280,7 @@ function removeFailingLegislator(row) {
 function manualFailingLegislator() {
     let blankFail = {forum: '', nation: '', reason: ''}
     id('noncompliant').appendChild(createTableRow(blankFail, 'L'));
-    REPORT_DETAILS.legsDeparting.push(blankFail);
+    REPORT_DETAILS.magsDeparting.push(blankFail);
     updateFailingCount();
 }
 
@@ -310,8 +310,8 @@ function parseToReport(row) {
  * Updates the displayed number of noncompliant legislators registered to reflect the number of current internally registered ones.
  */
 function updateFailingCount() {
-    id('num-fails').innerText = REPORT_DETAILS.legsDeparting.length;
-    id('smry-fails').innerText = REPORT_DETAILS.legsDeparting.length;
+    id('num-fails').innerText = REPORT_DETAILS.magsDeparting.length;
+    id('smry-fails').innerText = REPORT_DETAILS.magsDeparting.length;
 }
 
 /**
@@ -319,7 +319,7 @@ function updateFailingCount() {
  * @param {HTMLTableRowElement} row Row of the arrivals table corresponding to the legislator
  */
 function updateArrivingLegislator(row) {
-    REPORT_DETAILS.legsArriving[row.rowIndex - 1] = parseToReport(row);
+    REPORT_DETAILS.magsArriving[row.rowIndex - 1] = parseToReport(row);
 }
 
 /**
@@ -327,7 +327,7 @@ function updateArrivingLegislator(row) {
  * @param {HTMLTableRowElement} row Row of the arrivals table to remove
  */
 function removeArrivingLegislator(row) {
-    REPORT_DETAILS.legsArriving.splice(row.rowIndex - 1, 1);
+    REPORT_DETAILS.magsArriving.splice(row.rowIndex - 1, 1);
     row.parentElement.removeChild(row);
     updateArrivingCount();
 }
@@ -338,7 +338,7 @@ function removeArrivingLegislator(row) {
  function manualArrivingLegislator() {
     let blankLegislator = {forum: ''};
     id('arrivals').appendChild(createTableRow(blankLegislator, 'A'));
-    REPORT_DETAILS.legsArriving.push(blankLegislator);
+    REPORT_DETAILS.magsArriving.push(blankLegislator);
     updateArrivingCount();
 }
 
@@ -359,8 +359,8 @@ function parseToArrival(row) {
  * Updates the displayed number of arriving legislators registered to reflect the number of current internally registered ones.
  */
  function updateArrivingCount() {
-    id('num-arrivals').innerText = REPORT_DETAILS.legsArriving.length;
-    id('smry-arrivals').innerText = REPORT_DETAILS.legsArriving.length;
+    id('num-arrivals').innerText = REPORT_DETAILS.magsArriving.length;
+    id('smry-arrivals').innerText = REPORT_DETAILS.magsArriving.length;
 }
 
 /**
