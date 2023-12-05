@@ -11,8 +11,8 @@ function generate() {
     // Count the votes
     let ballots = {};
     let voteTables = {
-        "ayes": [],
-        "nays": [],
+        "aye": [],
+        "nay": [],
         "abstain": [],
         "absent": []
     }
