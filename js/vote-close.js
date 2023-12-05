@@ -14,7 +14,7 @@ function generate() {
         aye: 0,
         nay: 0,
         abstain: 0,
-        exempt: 0
+        excused: 0
     }
 
     for(let ballot in tally) {
@@ -38,8 +38,8 @@ function generate() {
         pasteVotesList += '\n';
         let cells = row.split('\t');
         if(cells[notesIndex].includes("Suspended")) continue;
-        if(ballots[cells[nameIndex]] == "exempt") continue;
         pasteVotesList += ballots[cells[nameIndex]] === undefined ? '' : capitalizeFirst(ballots[cells[nameIndex]]);
+        if(ballots[cells[nameIndex]] == "excused") continue;
         numMags++;
     }
 
