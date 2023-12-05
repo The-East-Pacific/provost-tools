@@ -1,5 +1,5 @@
 /**
- * Denotes the column schema of the Legislator Roster spreadsheet.
+ * Denotes the column schema of the Magister Roster spreadsheet.
  * This is used to get the column number for input info from the sheet.
  */
 const ROSTER_SCHEMA = [ // Column for...
@@ -16,7 +16,7 @@ const ROSTER_SCHEMA = [ // Column for...
 ];
 
 /**
- * Saves the column indexes for all Legislator Roster properties.
+ * Saves the column indexes for all Magister Roster properties.
  * Positive numbers denote absolute indexes (X means index X in an array representing a spreadsheet row).
  * Negative numbers denote relative indexes (-X means subtract X from the length of an array representing a row for the correct index).
  */
@@ -62,6 +62,11 @@ function capitalizeFirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+/**
+ * 
+ * @param {object} arrayObject Object containing arrays
+ * @returns A Discourse-compatible Markdown Table
+ */
 function generateMarkdownTable(arrayObject) {
     const arrays = Object.values(arrayObject);
     const maxLength = Math.max(...arrays.map(arr => arr.length));
@@ -71,7 +76,7 @@ function generateMarkdownTable(arrayObject) {
     // Add headers
     for (const key in arrayObject) {
       if (arrayObject.hasOwnProperty(key)) {
-        table += `| ${key} `;
+        table += `| ${capitalizeFirst(key)} `;
       }
     }
     table += '|\n';
