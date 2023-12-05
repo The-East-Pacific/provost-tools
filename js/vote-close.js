@@ -13,7 +13,8 @@ function generate() {
     let tally = {
         aye: 0,
         nay: 0,
-        abstain: 0
+        abstain: 0,
+        exempt: 0
     }
 
     for(let ballot in tally) {
