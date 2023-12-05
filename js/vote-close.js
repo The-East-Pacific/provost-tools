@@ -46,7 +46,7 @@ function generate() {
         if(cells[notesIndex].includes("Suspended")) continue;
         pasteVotesList += ballots[cells[nameIndex]] === undefined ? '' : capitalizeFirst(ballots[cells[nameIndex]]);
         if(ballots[cells[nameIndex]] == "excused") continue;
-        ballots[cells[nameIndex]] === undefined ? voteTables.absent.push(row[nameIndex]) : voteTables[ballots[cells[nameIndex]]].push(row[nameIndex]);
+        ballots[cells[nameIndex]] === undefined ? voteTables.absent.push(cells[nameIndex]) : voteTables[ballots[cells[nameIndex]]].push(cells[nameIndex]);
         numMags++;
     }
 
