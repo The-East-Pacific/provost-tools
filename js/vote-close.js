@@ -38,6 +38,7 @@ function generate() {
         pasteVotesList += '\n';
         let cells = row.split('\t');
         if(cells[notesIndex].includes("Suspended")) continue;
+        if(ballots[cells[nameIndex]] == "exempt") continue;
         pasteVotesList += ballots[cells[nameIndex]] === undefined ? '' : capitalizeFirst(ballots[cells[nameIndex]]);
         numMags++;
     }
