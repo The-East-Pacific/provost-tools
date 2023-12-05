@@ -65,38 +65,38 @@ function capitalizeFirst(str) {
 function generateMarkdownTable(arrayObject) {
     const arrays = Object.values(arrayObject);
     const maxLength = Math.max(...arrays.map(arr => arr.length));
-
-    let table = '| ';
-
+  
+    let table = '';
+  
     // Add headers
     for (const key in arrayObject) {
-        if (arrayObject.hasOwnProperty(key)) {
-            table += `${key} | `;
-        }
+      if (arrayObject.hasOwnProperty(key)) {
+        table += `| ${key} `;
+      }
     }
-    table += '\n';
-
-    // Add header separator
+    table += '|\n';
+  
+    // Add column separator
     for (const key in arrayObject) {
-        if (arrayObject.hasOwnProperty(key)) {
-            table += '| --- | ';
-        }
+      if (arrayObject.hasOwnProperty(key)) {
+        table += '| --- ';
+      }
     }
-    table += '\n';
-
+    table += '|\n';
+  
     // Add rows
     for (let row = 0; row < maxLength; row++) {
-        for (const key in arrayObject) {
-            if (arrayObject.hasOwnProperty(key)) {
-                const value = arrayObject[key][row] !== undefined ? arrayObject[key][row] : '';
-                table += `| ${value} | `;
-            }
+      for (const key in arrayObject) {
+        if (arrayObject.hasOwnProperty(key)) {
+          const value = arrayObject[key][row] !== undefined ? arrayObject[key][row] : '';
+          table += `| ${value} `;
         }
-        table += '\n';
+      }
+      table += '|\n';
     }
-
+  
     return table;
-}
+  }
 
 
 const MOTION_TYPES = {
