@@ -5,14 +5,14 @@
 }
 
 :root {
-    color: white;
+    color: #f2f2f0;
     font-size: 16px;
     font-family: var(--font-primary);
 
-    --tsp-blue: #109AED;
-    --pacific-sky: #38b9ff;
-    --nemo-blue: #0080C4;
-    --tropical-orange: #FF9900;
+    --tep-jewel: #109AED;
+    --pacific-thunder: #281f24;
+    --sea-nymph: #1a6f34;
+    --ripe-lemon: #f5e423;
 
     --font-primary: 'Semplicita', sans-serif;
 }
@@ -47,7 +47,7 @@ body::after {
 }
 ::selection {
     color: white;
-    background-color: var(--tropical-orange);
+    background-color: var(--ripe-lemon);
 }
 
 body > header {
@@ -69,12 +69,12 @@ body > footer {
 
 header,
 footer {
-    background-color: var(--tropical-orange);
+    background-color: var(--ripe-lemon);
 }
 
 header > h1 {
     text-transform: uppercase;
-    background-color: var(--nemo-blue);
+    background-color: var(--sea-nymph);
     margin: 0px;
     padding: 10px;
 }
@@ -86,7 +86,7 @@ header > h1::before {
     display: inline-block;
 }
 header > h2 {
-    background-color: var(--tsp-blue);
+    background-color: var(--tep-jewel);
     margin: 0px;
     padding: 3px;
     text-align: center;
@@ -94,7 +94,7 @@ header > h2 {
 
 footer {
     margin-top: auto;
-    border-top: 4px solid var(--tropical-orange);
+    border-top: 4px solid var(--ripe-lemon);
     font-size: 14px;
 }
 footer > div * {
@@ -108,13 +108,13 @@ footer a {
     text-decoration: none;
 }
 footer > div {
-    background-color: var(--nemo-blue);
+    background-color: var(--sea-nymph);
     padding: 5px;
     display: flex;
     justify-content: space-between;
 }
 #page-state {
-    background-color: var(--tsp-blue);
+    background-color: var(--tep-jewel);
 }
 #page-state.coa::after {
     content: '🪑';
@@ -126,7 +126,7 @@ footer > div {
  */
  @media only screen and (max-width: 800px) {
     header {
-        border-bottom: .5vw solid var(--tropical-orange);
+        border-bottom: .5vw solid var(--ripe-lemon);
     }
     header > h1 {
         font-size: 6vw;
@@ -137,7 +137,7 @@ footer > div {
         width: 9vw;
         height: 7.5vw;
         margin-right: 1.5vw;
-        border-right: .4vw solid var(--tropical-orange);
+        border-right: .4vw solid var(--ripe-lemon);
     }
     header > h2 {
         font-size: 4.125vw;
@@ -146,7 +146,7 @@ footer > div {
 }
 @media only screen and (min-width: 800px) {
     header {
-        border-bottom: 4px solid var(--tropical-orange);
+        border-bottom: 4px solid var(--ripe-lemon);
     }
     header > h1 {
         font-size: 48px;
@@ -157,7 +157,7 @@ footer > div {
         width: 72px;
         height: 60px;
         margin-right: 12px;
-        border-right: 3px solid var(--tropical-orange);
+        border-right: 3px solid var(--ripe-lemon);
     }
     header > h2 {
         font-size: 33px;
@@ -173,7 +173,7 @@ main {
 }
 
 .in-summary {
-    background-color: var(--tsp-blue);
+    background-color: var(--tep-jewel);
     border: 2px solid white;
     border-radius: 10px;
     padding: 5px;
@@ -206,7 +206,7 @@ main {
 }
 
 #parts {
-    background-color: var(--nemo-blue);
+    background-color: var(--sea-nymph);
     border-radius: 5px;
     padding: 5px;
 }
@@ -224,7 +224,7 @@ main {
 }
 #input > details {
     margin-top: 10px;
-    background-color: var(--tsp-blue);
+    background-color: var(--tep-jewel);
     border: 2px solid white;
     border-radius: 10px;
     padding: 5px;
@@ -236,7 +236,7 @@ main {
 }
 
 .orange-bar {
-    border-left: 3px solid var(--tropical-orange);
+    border-left: 3px solid var(--ripe-lemon);
     padding: 5px 0px 5px 10px;
     margin-top: 10px;
 }
@@ -263,10 +263,10 @@ details > div {
     margin-bottom: 10px;
 }
 details em {
-    border: 2px solid var(--tropical-orange);
+    border: 2px solid var(--ripe-lemon);
     border-radius: 3px;
-    background-color: var(--nemo-blue);
-    color: var(--tropical-orange);
+    background-color: var(--sea-nymph);
+    color: var(--ripe-lemon);
     font-style: normal;
     font-weight: bold;
     font-size: small;
@@ -278,7 +278,7 @@ details em::before {
     content: '💀';
     margin-right: 7px;
     padding-right: 5px;
-    border-right: 1px solid var(--tropical-orange);
+    border-right: 1px solid var(--ripe-lemon);
 }
 
 .popup-wrapper {
@@ -294,9 +294,9 @@ details em::before {
     justify-content: center;
 }
 .popup {
-    border: 3px solid var(--tropical-orange);
+    border: 3px solid var(--ripe-lemon);
     border-radius: 10px;
-    background-color: var(--tsp-blue);
+    background-color: var(--tep-jewel);
 }
 
 /*
@@ -305,7 +305,7 @@ details em::before {
 
 textarea,
 input {
-    background-color: var(--nemo-blue);
+    background-color: var(--sea-nymph);
     border: none;
     border-radius: 5px;
     padding: 5px;
@@ -330,9 +330,9 @@ var {
 }
 
 button {
-    border: 2px solid var(--tropical-orange);
+    border: 2px solid var(--ripe-lemon);
     border-radius: 3px;
-    background-color: var(--pacific-sky);
+    background-color: var(--pacific-thunder);
     color: white;
     font-size: 14px;
     font-weight: bold;
@@ -352,7 +352,7 @@ details > table caption {
     text-decoration: underline;
 }
 details > table th {
-    border-bottom: 2px solid var(--tropical-orange);
+    border-bottom: 2px solid var(--ripe-lemon);
 }
 details > table td > * {
     width: 100%;
@@ -362,11 +362,11 @@ details > table th:last-child {
     width: 7.5vw;
 }
 details > table tfoot td {
-    border-top: 1px solid var(--tropical-orange);
+    border-top: 1px solid var(--ripe-lemon);
     padding-top: 3px;
 }
 details > table tfoot var {
-    background-color: var(--nemo-blue);
+    background-color: var(--sea-nymph);
     border: none;
     border-radius: 5px;
     padding: 3px;

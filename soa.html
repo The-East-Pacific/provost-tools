@@ -40,9 +40,9 @@
                 <var id="smry-votes">0</var>
                 <span onclick="edit('D');">Discussions held:</span>
                 <var id="smry-discussions">0</var>
-                <span onclick="edit('L');">Legislators leaving:</span>
+                <span onclick="edit('L');">Magisters leaving:</span>
                 <var id="smry-fails">0</var>
-                <span onclick="edit('A');">Legislators arriving:</span>
+                <span onclick="edit('A');">Magisters arriving:</span>
                 <var id="smry-arrivals">0</var>
             </div>
             <div class="orange-bar two-rows">
@@ -113,24 +113,24 @@
                 </table>
             </details>
             <details id="in-legcheck">
-                <summary>Legislator Check</summary>
+                <summary>Magister Check</summary>
                 <div class="two-rows">
                     <span>
-                        <label for="roster">Full legislator roster:</label>
+                        <label for="roster">Full Magister roster:</label>
                         <em id="error-legcheck" hidden>No error</em>
                     </span>
                     <textarea id="roster" placeholder="Open the roster for this month, select everything (CTRL+A), copy it, and paste here"></textarea>
                 </div>
                 <div class="two-rows">
-                    <label for="intro-arrivals">Welcome text for new legislators:</label>
-                    <textarea id="intro-arrivals" placeholder="e.g. Welcome (back) to our new legislators this month!"></textarea>
+                    <label for="intro-arrivals">Welcome text for new Magisters:</label>
+                    <textarea id="intro-arrivals" placeholder="e.g. Welcome (back) to our new Magisters this month!"></textarea>
                 </div>
                 <table>
-                    <caption>Final table &ndash; Legislators failing the Legislator Check</caption>
+                    <caption>Final table &ndash; Magisters failing the Magister Check</caption>
                     <thead>
                         <tr>
                             <th>Forum Username</th>
-                            <th>TSP Nation</th>
+                            <th>TEP Nation</th>
                             <th>Reason</th>
                             <th>Actions</th>
                         </tr>
@@ -140,14 +140,14 @@
                         <tr>
                             <td colspan="3">Total noncompliant: <var id="num-fails">0</var></td>
                             <td>
-                                <button class="action-btn" onclick="manualFailingLegislator();" title="Manually mark another legislator to fail">+</button>
+                                <button class="action-btn" onclick="manualFailingLegislator();" title="Manually mark another Magister to fail">+</button>
                                 <button class="action-btn" onclick="legCheck(document.getElementById('roster').value.split('\n'));" title="Load in from roster">⭳</button>
                             </td>
                         </tr>
                     </tfoot>
                 </table>
                 <table>
-                    <caption>Final table &ndash; Newly admitted legislators</caption>
+                    <caption>Final table &ndash; Newly admitted Magisters</caption>
                     <thead>
                         <tr>
                             <th>Forum Username</th>
