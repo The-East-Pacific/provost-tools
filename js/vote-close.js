@@ -57,9 +57,41 @@ function generate() {
     console.log(tally);
 
     createVisual(billCode, threshold, tally);
-    id('bbcode-out').value = `[table=100][tr][tdc="2"][align=center][color=#109aed][size=xx-large][b]Final Result[/b][/size]\n[i]${billTitle}[/i][/color][/align][/tdc][/tr][tr][tdc="2"][align=center][img]ENTER LINK TO IMAGE AFTER UPLOAD HERE[/img][/align][/tdc][/tr][tr][td][align=center][color=#4572A7][size=large][b]Ayes: ${tally.aye}[/b][/size][/color][/align]\n[i]${(100.0 * tally.aye / (numMags - tally.absent)).toFixed(1)}% | ${(100.0 * tally.aye / (tally.aye + tally.nay)).toFixed(1)}% (discounting abstentions)[/i][/td][td][align=center][color=#AA4643][size=large][b]Nays: ${tally.nay}[/b][/size][/color][/align]\n[i]${(100.0 * tally.nay / (numMags - tally.absent)).toFixed(1)}% | ${(100.0 * tally.nay / (tally.aye + tally.nay)).toFixed(1)}% (discounting abstentions)[/i][/td][/tr][tr][tdc="2"]There were ${tally.abstain} Abstentions (${(100.0 * tally.abstain / (numMags - tally.absent)).toFixed(1)}%); ${tally.absent} magisters were absent. Thus, attendance for this vote was ${(100.0 * (numMags - tally.absent) / numMags).toFixed(1)}%.[/tdc][/tr][tr][tdc="2"][size=medium]In light of these results, the proposal [color=` + (tally.aye >= (tally.aye + tally.nay) * threshold ? '#017000][b]passes[/b][/color], having achieved' : '#C0392B][b]fails[/b][/color], having fallen short of') + ` the required majority (>${threshold * 100}%).[/size][/tdc][/tr][/table]`;
     id('table-out').value = generateMarkdownTable(voteTables);
     id('paste-votes').value = pasteVotesList.replace('\n', '');
+    id('bbcode-out').value = `**[color=#109aed]${billCode}[/color] [color=#ff9900]|[/color]** ${billTitle} <span style="border-radius: 3px; padding: 2px 4px; margin-left: 2px; font-weight: bold; border: 1.5px` + (tally.aye >= (tally.aye + tally.nay) * threshold ? 'solid green; color: green">Passed' : 'solid red; color: red">Failed') + `</span>
+
+    <hr>
+    
+    [center][size=200]**[color=#109aed]Final Result[/color]**[/size][/center]
+    
+    [center]
+    INSERT IMAGE HERE
+    [/center]
+    
+    <hr>
+    
+    This **BILLTYPE** required a ${threshold * 100}% majority of votes in favour, excluding abstentions, to pass. 
+    
+    The results are tabled as follows:
+    ${generateMarkdownTable(voteTables)}
+    
+    | Type | Tally | Percentage of Vote | Final Percentage |
+    | --- | --- | --- | --- |
+    | **[color=#4572a7]Ayes[/color]** |${tally.aye} | ${(100.0 * tally.aye / (tally.aye + tally.nay)).toFixed(1)}% | **${(100.0 * tally.aye / (numMags - tally.absent)).toFixed(1)}%**
+    | **[color=#aa4643]Nays[/color]** | ${tally.nay} | ${(100.0 * tally.nay / (tally.aye + tally.nay)).toFixed(1)}% | **${(100.0 * tally.nay / (numMags - tally.absent)).toFixed(1)}%** |
+    | **[color=#ff9900]Abstentions[/color]** | ${tally.abstain} | ${(100.0 * tally.abstain / (numMags - tally.absent)).toFixed(1)}% |
+    |
+    |
+    | **[color=#109aed]Total[/color]** | ${numMags - tally.absent} | ${(100.0 * (numMags - tally.absent) / numMags).toFixed(1)}% of Magisters |
+    | **[color=#989898]Absent[/color]** | ${tally.absent} | ${(100.0 * tally.absent / numMags).toFixed(1)}% of Magisters |
+    
+    Pursuant to the Concordat and the Standing Orders, the Magisterium has voted to **[color=` + (tally.aye >= (tally.aye + tally.nay) * threshold ? 'green]approve' : 'red]reject') + `[/color]** this Repeal.
+    
+    It will now be sent to the Delegate/Conclave for signature/referendum.
+    [details=Screenshot]
+    SCREENSHOT OF POLL GOES HERE
+    [/details]`;
 }
 
 // Paint a visual representation of the voting results.
@@ -140,3 +172,37 @@ function paintBar(tally) {
     }
     CTX.fillText(`${tally.nay}`, 320, 280);
 }
+
+const template = `**[color=#109aed]${billCode}[/color] [color=#ff9900]|[/color]** ${billTitle} <span style="border-radius: 3px; padding: 2px 4px; margin-left: 2px; font-weight: bold; border: 1.5px` + (tally.aye >= (tally.aye + tally.nay) * threshold ? 'solid green; color: green">Passed' : 'solid red; color: red">Failed') + `</span>
+
+<hr>
+
+[center][size=200]**[color=#109aed]Final Result[/color]**[/size][/center]
+
+[center]
+INSERT IMAGE HERE
+[/center]
+
+<hr>
+
+This **BILLTYPE** required a ${threshold * 100}% majority of votes in favour, excluding abstentions, to pass. 
+
+The results are tabled as follows:
+${generateMarkdownTable(voteTables)}
+
+| Type | Tally | Percentage of Vote | Final Percentage |
+| --- | --- | --- | --- |
+| **[color=#4572a7]Ayes[/color]** |${tally.aye} | ${(100.0 * tally.aye / (tally.aye + tally.nay)).toFixed(1)}% | **${(100.0 * tally.aye / (numMags - tally.absent)).toFixed(1)}%**
+| **[color=#aa4643]Nays[/color]** | ${tally.nay} | ${(100.0 * tally.nay / (tally.aye + tally.nay)).toFixed(1)}% | **${(100.0 * tally.nay / (numMags - tally.absent)).toFixed(1)}%** |
+| **[color=#ff9900]Abstentions[/color]** | ${tally.abstain} | ${(100.0 * tally.abstain / (numMags - tally.absent)).toFixed(1)}% |
+|
+|
+| **[color=#109aed]Total[/color]** | ${numMags - tally.absent} | ${(100.0 * (numMags - tally.absent) / numMags).toFixed(1)}% of Magisters |
+| **[color=#989898]Absent[/color]** | ${tally.absent} | ${(100.0 * tally.absent / numMags).toFixed(1)}% of Magisters |
+
+Pursuant to the Concordat and the Standing Orders, the Magisterium has voted to **[color=` + (tally.aye >= (tally.aye + tally.nay) * threshold ? 'green]approve' : 'red]reject') + `[/color]** this Repeal.
+
+It will now be sent to the Delegate/Conclave for signature/referendum.
+[details=Screenshot]
+SCREENSHOT OF POLL GOES HERE
+[/details]`
